@@ -96,4 +96,7 @@ dependencies {
 
     //Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //Glide
+    implementation "com.github.skydoves:landscapist-glide:1.5.2"
 }

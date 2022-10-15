@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.interview.codingassignment.common.Constants
 import com.interview.codingassignment.data.data_source.local.ApplicationDatabase
-import com.interview.codingassignment.data.data_source.remote.UserApiService
+import com.interview.codingassignment.data.data_source.remote.MatchingUserApiService
 import com.interview.codingassignment.data.data_source.UserRepositoryImp
 import com.interview.codingassignment.domain.repository.UserRepository
 import dagger.Module
@@ -54,16 +54,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideUserApiService(retrofit: Retrofit) : UserApiService {
-        return retrofit.create(UserApiService::class.java)
+    fun provideUserApiService(retrofit: Retrofit) : MatchingUserApiService {
+        return retrofit.create(MatchingUserApiService::class.java)
     }
 
     @Singleton
     @Provides
     fun provideUserRepository(
-        userApiService: UserApiService,
+        matchingUserApiService: MatchingUserApiService,
         db : ApplicationDatabase
     ) : UserRepository {
-        return UserRepositoryImp(userApiService,db)
+        return UserRepositoryImp(matchingUserApiService,db)
     }
 }
