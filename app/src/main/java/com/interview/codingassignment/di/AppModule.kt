@@ -5,8 +5,8 @@ import androidx.room.Room
 import com.interview.codingassignment.common.Constants
 import com.interview.codingassignment.data.data_source.local.ApplicationDatabase
 import com.interview.codingassignment.data.data_source.remote.MatchingUserApiService
-import com.interview.codingassignment.data.data_source.UserRepositoryImp
-import com.interview.codingassignment.domain.repository.UserRepository
+import com.interview.codingassignment.data.data_source.MatchingUserRepositoryImp
+import com.interview.codingassignment.domain.repository.MatchingUserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,7 +63,7 @@ object AppModule {
     fun provideUserRepository(
         matchingUserApiService: MatchingUserApiService,
         db : ApplicationDatabase
-    ) : UserRepository {
-        return UserRepositoryImp(matchingUserApiService,db)
+    ) : MatchingUserRepository {
+        return MatchingUserRepositoryImp(matchingUserApiService,db)
     }
 }

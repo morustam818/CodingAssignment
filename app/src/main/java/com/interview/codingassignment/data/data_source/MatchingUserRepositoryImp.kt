@@ -4,14 +4,14 @@ import androidx.room.withTransaction
 import com.interview.codingassignment.data.data_source.local.ApplicationDatabase
 import com.interview.codingassignment.data.data_source.remote.MatchingUserApiService
 import com.interview.codingassignment.data.data_source.remote.dto.toMatchingUserRequest
-import com.interview.codingassignment.domain.repository.UserRepository
+import com.interview.codingassignment.domain.repository.MatchingUserRepository
 import com.interview.codingassignment.domain.utils.RequestStatus
 import javax.inject.Inject
 
-class UserRepositoryImp @Inject constructor(
+class MatchingUserRepositoryImp @Inject constructor(
     private val matchingUserApiService: MatchingUserApiService,
     private val db : ApplicationDatabase
-) : UserRepository {
+) : MatchingUserRepository {
 
     override fun getUsers() = networkBoundResource(
         query = {

@@ -5,7 +5,7 @@ import com.interview.codingassignment.domain.model.MatchingUserRequest
 import com.interview.codingassignment.domain.utils.RequestStatus
 import kotlinx.coroutines.flow.Flow
 
-interface UserRepository {
+interface MatchingUserRepository {
 //    suspend fun insertUsers(user : List<MatchingUserRequest>)
 //    suspend fun fetchUsers() : List<MatchingUserRequest>
     fun getUsers() : Flow<Resource<List<MatchingUserRequest>>>
