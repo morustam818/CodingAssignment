@@ -23,20 +23,17 @@ class DashboardViewModel @Inject constructor(
 
     fun getUsers() = viewModelScope.launch(Dispatchers.IO){
         getUsers.invoke().collect{
-            Timber.e("Testing Result : ${it.data}")
             when(it){
                 is Resource.Loading -> {
-                    it.data?.let { users ->
-                        if (users.isEmpty()){
-                            uiState.value = DashboardUIState(
-                                users = null,
-                                isLoading = true,
-                                errorMessage = null
-                            )
-                        }
-                    }
+                    Timber.e("Testing Result : Loading")
+                    uiState.value = DashboardUIState(
+                        users = it.data,
+                        isLoading = true,
+                        errorMessage = null
+                    )
                 }
                 is Resource.Failed -> {
+                    Timber.e("Testing Result : Failed")
                     uiState.value = DashboardUIState(
                         users = it.data,
                         isLoading = false,
@@ -44,6 +41,7 @@ class DashboardViewModel @Inject constructor(
                     )
                 }
                 is Resource.Success ->{
+                    Timber.e("Testing Result : Success")
                     uiState.value = DashboardUIState(
                         users = it.data,
                         isLoading = false,

@@ -1,13 +1,10 @@
-package com.interview.codingassignment
+package com.interview.codingassignment.data.data_source.local
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
-import com.interview.codingassignment.data.data_source.local.ApplicationDao
-import com.interview.codingassignment.data.data_source.local.ApplicationDatabase
 import com.interview.codingassignment.domain.model.MatchingUserRequest
 import com.interview.codingassignment.domain.utils.RequestStatus
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After

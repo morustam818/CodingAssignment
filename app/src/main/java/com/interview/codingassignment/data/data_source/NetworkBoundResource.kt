@@ -23,7 +23,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
             }
         } catch (e : IOException){
             query().map { Resource.Failed(
-                it,"Failed to get response, please check internet connection")
+                it,"Failed to get response, please check your internet connection")
             }
         }
     } else {

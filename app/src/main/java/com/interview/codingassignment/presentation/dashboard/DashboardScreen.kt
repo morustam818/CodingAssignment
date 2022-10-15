@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,7 +14,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,29 +32,50 @@ fun DashboardScreen(
     modifier: Modifier = Modifier,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
+    var isLoading by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         viewModel.getUsers()
+        isLoading = true
     }
     Box(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ){
         viewModel.uiState.value.users?.let {
-            LazyRow(
-                modifier = modifier.fillMaxSize()
-            ){
-                items(it) { user ->
-                    Box(
-                        modifier = Modifier
-                            .fillParentMaxWidth()
-                            .fillParentMaxHeight()
-                    ){
-                        DashboardScreenContent(user = user, onClick = { statusRequest,email ->
-                            viewModel.updateMatchingRequestStatus(statusRequest,email)
-                        })
+            isLoading = viewModel.uiState.value.isLoading
+            if (it.isEmpty())
+                Text(
+                    text = "${viewModel.uiState.value.errorMessage}",
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center
+                )
+            else {
+                LazyRow(
+                    modifier = modifier.fillMaxSize()
+                ){
+                    items(it) { user ->
+                        Box(
+                            modifier = Modifier
+                                .fillParentMaxWidth()
+                                .fillParentMaxHeight()
+                        ){
+                            DashboardScreenContent(user = user, onClick = { statusRequest,email ->
+                                viewModel.updateMatchingRequestStatus(statusRequest,email)
+                            })
+                        }
                     }
                 }
             }
         }
+        if (isLoading)
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .width(40.dp)
+                    .height(40.dp)
+                    .align(Alignment.Center),
+                strokeWidth = Dp(value = 4F)
+            )
     }
 }
 
