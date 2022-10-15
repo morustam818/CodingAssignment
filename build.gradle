@@ -1,0 +1,28 @@
+buildscript {
+    ext {
+        compose_ui_version = '1.2.1'
+        hiltVersion = '2.42'
+    }
+    dependencies {
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+    }
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.0' apply false
+    id 'com.android.library' version '7.3.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+}
+ext {
+    // App dependencies
+    activityComposeVersion = '1.5.1'
+    androidXVersion = '1.0.0'
+    archLifecycleVersion = '2.6.0-alpha02'
+    composeVersion = '1.2.1'
+    composeCompilerVersion = '1.2.0'
+    coroutinesVersion = '1.6.1'
+    hiltAndroidXVersion = '1.0.0'
+    roomVersion = '2.4.3'
+    timberVersion = '5.0.1'
+    retrofit = '2.9.0'
+    okhttp = '4.10.0'
+}
